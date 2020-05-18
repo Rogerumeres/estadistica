@@ -1,0 +1,210 @@
+
+                   
+
+    <?php
+$atributos = array( 'id' => 'miformulario','name'=>'form','class'=>'form-horizontal');
+//echo form_open(null, $atributos);
+echo form_open_multipart('Seguimiento_ITS/Listar_hepatitis_positivo',$atributos);
+?>
+    
+ <div class="col-md-6">
+
+ 
+    
+  <div class="form-group">
+ 
+     <select class="chosen-select form-control" id="form-field-select-3" data-placeholder="Seleccione Microred" name="establec" >
+        <option value="00">Seleccione MicroRed</option>                    
+                        
+
+                  <?php
+foreach ($result1 as $row) {
+    ?>
+      <option value="<?php echo $row->Codigo_MicroRed ?>"><?php echo $row->MicroRed ?></option>
+
+      <?php
+  }
+?>
+                </select>
+   </div>
+
+    
+       <input type="submit" value="Mostrar" title="Mostrar" class="btn btn-primary" id="Mostrar"/>
+ 
+
+ </div>
+
+<?php
+if (empty($result2)){
+
+$fecha_actualizacion='   No existen datos';
+  }else{
+  foreach ($result2 as $row) {
+            
+   $fecha_actualizacion=$row->fecha_actualizacion;
+
+    }
+
+  }
+       ?>
+       
+<div class="col-sm-12 widget-container-col" id="widget-container-col-2">
+  
+
+                                            <div class="widget-box widget-color-blue" id="widget-box-2">
+                                                
+  
+                                                
+                                                
+                                                <div class="widget-header">
+                                                  
+                                             
+                                            <center><h1>Fecha actualización: <?php echo $fecha_actualizacion ?> </h1></center>
+
+                                              
+                                                </div>
+
+                                                <div class="widget-body">
+                                                    <div class="widget-main no-padding">
+                                                        <table class="table table-striped table-bordered table-hover">
+                                                            <thead class="thin-border-bottom">
+
+                                                                <tr>
+                 
+
+                <th>  Fecha Atención      </th>
+               
+                <th>   Establecimiento   </th>    
+               
+                <th>DNI</th>
+                <th>Nombre de Paciente</th>
+                <th>Edad</th>
+                <th>Tipo edad</th>
+                                                                              
+                <th >Lote Página Registro</th>
+             
+               
+                <th>Tamisaje + Hepatitis B PG</th>
+                <th>Tamisaje + Hepatitis B Gestante</th>
+                <th>Tamisaje + Hepatitis C</th>
+                <th>Dx hepatitis B</th>
+                <th>Dx hepatitis C</th>
+                                  <th>Ver Detalle</th>
+                </tr>
+                                                            </thead>
+
+                                                            <tbody>
+
+                                                             <?php
+                                                           
+                                                            foreach ($result2 as $row) {
+                                  
+                                                                     ?> 
+                                                               <tr>
+                  
+                  <td >
+                      <center> <?php echo $row->Fecha_Atencion ?></center>
+                  </td>
+                  
+                  <td> 
+                    <center> <?php echo $row->Nombre_Establecimiento ?></center>
+                  </td>
+                
+                  <td>
+                       <center> <?php echo $row->Numero_Documento?></center>
+                  </td>
+                 
+                  <td >
+                       <center> <?php echo $row->Nombre_Paciente ?></center>
+                  </td>
+                  <td>
+                       <center> <?php echo $row->Edad_Reg ?></center>
+                   </td>
+                    <td >
+                       <center> <?php echo $row->Tipo_Edad ?></center>
+                  </td>
+                  
+
+                  <td>
+                       <center> <?php echo $row->Lote ?> | <?php echo $row->Num_Pag ?> | <?php echo $row->Num_Reg ?></center>
+                  </td>
+                                                   
+                   <?php if ($row->Tamisaje_Positivo_HepatitisB_PoblacionGeneral==1) { ?> 
+
+                                                                    <td style="background-color:#ffc93b;font-size:12px; ">
+                                                                        <center> <?php echo $row->Tamisaje_Positivo_HepatitisB_PoblacionGeneral ?></center>
+                                                                    </td>
+                                                                      <?php } else { ?>
+
+                                                                          <td>
+                                                                        <center> <b><?php echo '' ?></b></center>
+                                                                    </td>
+                                                                      <?php }  ?>  
+
+
+                  <?php if ($row->Tamisaje_Positivo_HepatitisB_Gestante==1) { ?> 
+
+                                                                    <td style="background-color:#ffc93b;font-size:11px; ">
+                                                                        <center> <?php echo $row->Tamisaje_Positivo_HepatitisB_Gestante ?></center>
+                                                                    </td>
+                                                                      <?php } else { ?>
+
+                                                                          <td>
+                                                                        <center> <b><?php echo '' ?></b></center>
+                                                                    </td>
+                                                                      <?php }  ?>  
+
+                  <?php if ($row->Tamisaje_Hepatitis_C_Cronica==1) { ?> 
+
+                                                                    <td style="background-color:#ffc93b;font-size:11px; ">
+                                                                        <center> <?php echo $row->Tamisaje_Hepatitis_C_Cronica ?></center>
+                                                                    </td>
+                                                                      <?php } else { ?>
+
+                                                                          <td>
+                                                                        <center> <b><?php echo '' ?></b></center>
+                                                                    </td>
+                                                                      <?php }  ?>  
+
+                 <?php if ($row->Dx_HepatitisB_Cronica==1) { ?> 
+
+                                                                    <td style="background-color:#ffa89b;font-size:11px; ">
+                                                                        <center> <?php echo $row->Dx_HepatitisB_Cronica ?></center>
+                                                                    </td>
+                                                                      <?php } else { ?>
+
+                                                                          <td>
+                                                                        <center> <b><?php echo '' ?></b></center>
+                                                                    </td>
+                                                                      <?php }  ?> 
+
+					<?php if ($row->Dx_HepatitisC_Cronica==1) { ?> 
+
+                                                                    <td style="background-color:#ffa89b;font-size:11px; ">
+                                                                        <center> <?php echo $row->Dx_HepatitisC_Cronica ?></center>
+                                                                    </td>
+                                                                      <?php } else { ?>
+
+                                                                          <td>
+                                                                        <center> <b><?php echo '' ?></b></center>
+                                                                    </td>
+                                                                      <?php }  ?> 
+              
+            
+             
+                <td><center>
+                        <a class='iframe' href="<?php echo base_url()?>Detalle_error/mostrar_errores_its_detalle/<?php echo $row->Codigo_Unico ?>/<?php echo $row->Id_Cita?>"><i class="fa fa-eye bigger-200"></i></a></center>
+                  </td>
+                </tr>
+
+                                                               <?php
+                                                           }
+                                                           ?>
+
+                                                                
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div><!-- /.span -->

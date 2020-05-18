@@ -1,0 +1,32 @@
+## Configuracion del mod rewrite para URL amigables
+ RewriteEngine On  
+
+ 
+ RewriteCond $1 !^(index.php|robots\.txt|sitemap\.xml|assets|uploads)
+ RewriteCond %{REQUEST_URI} ^/system.*
+ RewriteRule ^(.*)$ index.php?/$1 [L]
+ RewriteCond %{REQUEST_FILENAME} !-f
+ RewriteCond %{REQUEST_FILENAME} !-d
+ RewriteRule ^(.+)$ index.php?/$1 [L]
+ ErrorDocument 404 index.php
+
+# File modified on Wed Mar  1 05:37:31 2017 by server
+# For security reasons, mod_php is not used on this server. Use a php.ini file for php directives
+# php_value upload_max_filesize 100M
+# For security reasons, mod_php is not used on this server. Use a php.ini file for php directives
+# php_value post_max_size 100M
+# For security reasons, mod_php is not used on this server. Use a php.ini file for php directives
+# php_value max_execution_time 1000
+# For security reasons, mod_php is not used on this server. Use a php.ini file for php directives
+# php_value max_input_time 1000
+
+# php -- BEGIN cPanel-generated handler, do not edit
+# Configure el paquete “ea-php56” como el lenguaje de programación predeterminado “PHP”.
+<IfModule mime_module>
+  AddHandler application/x-httpd-ea-php56 .php .php5 .phtml
+</IfModule>
+# php -- END cPanel-generated handler, do not edit
+RewriteCond %{HTTP_HOST} ^estadistica\.redsaludlaconvencion\.gob\.pe$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.estadistica\.redsaludlaconvencion\.gob\.pe$
+RewriteRule ^/?$ "http\:\/\/www\.estadistica\.redsaludlaconvencion\.gob\.pe\/" [R=301,L]
+
